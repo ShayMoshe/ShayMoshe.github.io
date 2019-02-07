@@ -226,6 +226,8 @@ Await)</a> sample.</p>
     log('> Name:             ' + device.name);
     log('> Id:               ' + device.id);
     log('> Connected:        ' + device.gatt.connected);
+    log('> Device:        ' + device);
+    console.log(device);
   })
   .catch(error => {
     log('Argh! ' + error);
