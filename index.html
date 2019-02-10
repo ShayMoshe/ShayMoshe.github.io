@@ -228,8 +228,9 @@ Await)</a> sample.</p>
     log('> Connected:        ' + device.gatt.connected);
     log('> Device:        ' + device);
     console.log(device);
-    device.watchAdvertisements();
+    
     device.addEventListener('advertisementreceived', interpretIBeacon);
+    device.watchAdvertisements();
   })
   .catch(error => {
     log('Argh! ' + error);
