@@ -23,6 +23,8 @@ limitations under the License.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>Web Bluetooth / Device Info Sample</title>
+    <script src="https://blueappio.github.io/blueapp.io/blueapp.io.min.js"></script>
+
     <script>
       // Add a global error event listener early on in the page load, to help ensure that browsers
       // which don't support specific functionality still end up displaying a meaningful message.
@@ -219,6 +221,7 @@ Await)</a> sample.</p>
     options.filters = filters;
   }
 
+  var wbdevice;
   log('Requesting Bluetooth Device...');
   log('with ' + JSON.stringify(options));
   navigator.bluetooth.requestDevice(options)
@@ -228,12 +231,13 @@ Await)</a> sample.</p>
     log('> Connected:        ' + device.gatt.connected);
     log('> Device:        ' + device);
     console.log(device);
+    wbdevice = device;
+    wbdevice.watchAdvertisements();
+    wbdevice.addEventListener('advertisementreceived', interpretIBeacon);
     
-    device.addEventListener('advertisementreceived', interpretIBeacon);
-    device.watchAdvertisements();
   })
   .catch(error => {
-    log('Argh! ' + error);
+    log('Err! ' + error);
   });
 
   function interpretIBeacon(event) {
